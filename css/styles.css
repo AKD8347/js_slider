@@ -17,10 +17,10 @@ a:hover, a:focus, a:visited {
 }
 
 .slider {
-  max-width: 90%;
+  max-width: 660px;
   position: relative;
   height: 300px;
-  margin: auto auto 15px;
+  margin: 30px auto;
 }
 .slider__item {
   display: none;

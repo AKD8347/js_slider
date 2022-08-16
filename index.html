@@ -11,7 +11,44 @@
     <title>Title</title>
 </head>
 <body>
+<div class="slider">
+    <div class="slider__item">
+        <img src="img/slide1.jpg" alt="Первый слайд">
+        <div class="slider__text">Заголовок слайда 1</div>
+    </div>
 
-<script rel="script" src="js/script.js" type="javascript"></script>
+    <div class="slider__item">
+        <img src="img/slide2.jpg" alt="Второй слайд">
+        <div class="slider__text">Заголовок слайда 2</div>
+    </div>
+
+    <div class="slider__item">
+        <img src="img/slide3.jpg" alt="Третий слайд">
+        <div class="slider__text">Заголовок слайда 3</div>
+    </div>
+
+    <div class="slider__item">
+        <img src="img/slide4.jpg" alt="Третий слайд">
+        <div class="slider__text">Заголовок слайда 4</div>
+    </div>
+
+    <div class="slider__item">
+        <img src="img/slide5.jpg" alt="Третий слайд">
+        <div class="slider__text">Заголовок слайда 5</div>
+    </div>
+
+    <a class="slider__prev" onclick="minusSlide()">&#10094;</a>
+    <a class="slider__next" onclick="plusSlide()">&#10095;</a>
+</div>
+
+<ul class="slider__dots"></ul>
+
+<!--<div class="slider__dots">-->
+<!--    <span class="slider__dots--item" onclick="currentSlide()"></span>-->
+<!--    <span class="slider-dots_item" onclick="currentSlide(2)"></span>-->
+<!--    <span class="slider-dots_item" onclick="currentSlide(3)"></span>-->
+<!--</div>-->
+
+<script src="js/script.js"></script>
 </body>
 </html>

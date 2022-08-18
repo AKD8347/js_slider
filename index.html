@@ -11,7 +11,7 @@
     <title>Title</title>
 </head>
 <body>
-<div class="slider">
+<section class="slider">
     <div class="slider__item">
         <img src="img/slide1.jpg" alt="Первый слайд">
         <div class="slider__text">Заголовок слайда 1</div>
@@ -37,12 +37,13 @@
         <div class="slider__text">Заголовок слайда 5</div>
     </div>
 
-    <a class="slider__prev" onclick="minusSlide()">&#10094;</a>
-    <a class="slider__next" onclick="plusSlide()">&#10095;</a>
-</div>
+    <div class="slider__arrows">
+        <a href="#" class="slider__arrow slider__arrow--prev">&#10094;</a>
+        <a href="#" class="slider__arrow slider__arrow--next">&#10095;</a>
+    </div>
 
-<ul class="slider__dots"></ul>
-
+    <ul class="slider__dots"></ul>
+</section>
 <script src="js/script.js"></script>
 </body>
 </html>

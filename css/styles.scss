@@ -53,28 +53,43 @@ a {
     text-shadow: 1px 1px 1px #000, 0 0 1em #000;
   }
 
-  &__prev, &__next {
-    cursor: pointer;
+  &__arrows {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    height: 60px;
     position: absolute;
-    top: 50%;
-    width: auto;
-    margin-top: -22px;
-    padding: 16px;
+    top: calc(50% - (60px/2));
+  }
+
+  &__arrow {
+    display: flex;
+    align-items: center;
+    position: relative;
+    justify-content: center;
+    width: 40px;
+    padding: 10px;
     color: white;
+    text-align: center;
     font-weight: bold;
     font-size: 18px;
     transition: 0.6s ease;
-    border-radius: 0 3px 3px 0;
 
     &:hover {
       background-color: rgba(0, 0, 0, 0.8);
     }
   }
 
-  &__next {
-    right: 0;
-    border-radius: 3px 0 0 3px;
+  &__prev {
+    border-radius: 0 10px 10px 0;
   }
+
+  &__next {
+    border-radius: 10px 0 0 10px;
+  }
+
 
   &__dots {
     text-align: center;

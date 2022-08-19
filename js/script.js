@@ -1,7 +1,7 @@
 //Функция слайдера
 function showSlider () {
     //Находим контейнер со слайдами
-    let sliderContainer = document.querySelector('.slider');
+    let sliderContainer = document.querySelector('.slider__wrapper');
     //Находим контейнер со стрелками
     let sliderArrows = document.querySelector('.slider__arrows');
     //Находим все слайды
@@ -51,11 +51,23 @@ function showSlider () {
               let nextSlide;
               //при клике на стрелку влево
               if(arrow.classList.contains('slider__arrow--prev')) {
-                  //если текуший слайд первый, мы идем к следующему до последнего
-                  nextSlide = activeSlide === 0? imgLength - 1 : activeSlide - 1;
+                  //если текуший слайд первый, мы идем к последнему
+                  if( activeSlide === 0) {
+                      nextSlide = imgLength - 1;
+                  } else {
+                  //если не первое, едем к предыдущему
+                      nextSlide = activeSlide - 1;
+                  }
+                  // nextSlide = activeSlide === 0? imgLength - 1 : activeSlide - 1;
               } else {
                   //если текуший слайд последний, мы идем к первому
-                  nextSlide = activeSlide === imgLength - 1? 0 : activeSlide + 1;
+                  // nextSlide = activeSlide === imgLength - 1? 0 : activeSlide + 1;
+                  if (activeSlide === imgLength - 1) {
+                      nextSlide = 0;
+                  } else {
+                      nextSlide = activeSlide + 1;
+                  }
+
               }
 
               if(activeSlide === 0 && activeSlide === activeSlide - 1) {

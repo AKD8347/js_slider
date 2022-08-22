@@ -1,5 +1,5 @@
 //Функция слайдера
-function showSlider () {
+function showSlider (options) {
     //Находим контейнер со слайдами
     let sliderContainer = document.querySelector('.slider__wrapper');
     //Находим контейнер со стрелками
@@ -9,18 +9,32 @@ function showSlider () {
     //Находим контейнер для точек
     let dots = document.querySelector('.slider__dots');
 
+    //добавляем опции по умолчанию
+    options = options || {
+        autoplay: false,
+        dots: true,
+        interval: 0
+    }
+
     //Функция инициализвции картинок
     initImages();
     //Функция инициализвции стрелок
     initArrows();
-    //Функция инициализвции тшчек
-    initDots()
+    //Функция инициализвции точек
+    if (options.dots) {
+        initDots()
+    }
+    //Функция инициализвции автопрокрутки
+    if (options.autoplay) {
+        initAutoplay();
+    }
 
     function initImages() {
         //при отсутсвии картинок выходим из функции
         if(!images) {
             return;
         }
+
         //при наличии проходим по каждому элементу
         images.forEach((img, index) => {
             //добавляем элементу атрибут data-index с индексом элемента
@@ -61,21 +75,12 @@ function showSlider () {
                   // nextSlide = activeSlide === 0? imgLength - 1 : activeSlide - 1;
               } else {
                   //если текуший слайд последний, мы идем к первому
-                  // nextSlide = activeSlide === imgLength - 1? 0 : activeSlide + 1;
                   if (activeSlide === imgLength - 1) {
                       nextSlide = 0;
                   } else {
                       nextSlide = activeSlide + 1;
                   }
-
               }
-
-              if(activeSlide === 0 && activeSlide === activeSlide - 1) {
-                  nextSlide = activeSlide - 1;
-              } else if (activeSlide === activeSlide - 1) {
-                  nextSlide = activeSlide + 1;
-              }
-
               //Функция переключения слайдера, в которую передаем номер акирвного слайда
               runSlider(nextSlide);
             });
@@ -89,18 +94,17 @@ function showSlider () {
         }
         //при наличии проходим по каждому элементу
         images.forEach((img, index) => {
-            //создаем верстку точки
+            //создаем верстку точки, и добавляем активный класс первой точке
             let dot = `<li class="slider__dots--item number-${index} ${index === 0? 'active': ''}" data-index="${index}"></li>`;
             //добавляем верстку в контейнер
             dots.innerHTML += dot;
 
         })
-
+        //добавляем точкам функцию клика
         dots.querySelectorAll('.slider__dots--item').forEach(dot =>  {
             dot.addEventListener('click', function (){
+                //передаем в функцию слайдера индекс точки, по которой отработало собитые click
                 runSlider(this.dataset.index)
-                dots.querySelector('.active').classList.remove('active');
-                this.classList.add('active');
             });
         })
     }
@@ -110,14 +114,44 @@ function showSlider () {
         sliderContainer.querySelector('.active').classList.remove('active');
         //добавляем активный класс нужному изображению
         sliderContainer.querySelector('.number-' + number).classList.add('active');
-        //убираем у всех точек активный класс
-        dots.querySelector('.active').classList.remove('active');
-        //добавляем активный класс нужной точке
-        dots.querySelector('.number-' + number).classList.add('active');
+
+        if(options.dots) {
+            //убираем у всех точек активный класс
+            dots.querySelector('.active').classList.remove('active');
+            //добавляем активный класс нужной точке
+            dots.querySelector('.number-' + number).classList.add('active');
+        }
     }
+
+    function initAutoplay() {
+        //задаем интерсал, который передаем из options
+        setInterval(() => {
+            //определяем активный слайд
+            let activeSlide = +sliderContainer.querySelector(".active").dataset.index;
+            //определяем переменную для следующего слайда
+            let nextSlide;
+            if(activeSlide === images.length - 1) {
+                //если активный слайд последний - переключаемся на первый
+                nextSlide = 0
+            } else {
+                //и наоборот
+                nextSlide = activeSlide + 1;
+            }
+            runSlider(nextSlide);
+        }, options.interval);
+    }
+}
+
+//Задем опции для слайдера
+let sliderOptions = {
+    autoplay: false,
+    dots: true,
+    interval: 2000
 }
 
 //при загрузке всех элементов страницы инициализируем слайдер
 document.addEventListener("DOMContentLoaded", function(){
-   showSlider();
+   showSlider(sliderOptions);
 });
+
+
